@@ -12,7 +12,7 @@ const Currency = db.define(
             allowNull: false
         }
     }
-)
+);
 (async ()=> {
     await db.sync();
 })();

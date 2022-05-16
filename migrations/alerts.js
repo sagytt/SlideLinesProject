@@ -15,6 +15,6 @@ const Alert = db.define(
     }
 );
 (async ()=> {
-    await db.sync();
+    await db.sync({force:true});
 })();
 module.exports=Alert;

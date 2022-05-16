@@ -1,27 +1,14 @@
 // const { validationResult } = require('express-validator');
 let https = require('https');
-// const database = require('../database/db');
-
-
-const initDatabase = (req, res) => {
-    const sqlQuery =  'CREATE TABLE IF NOT EXISTS emails(id int AUTO_INCREMENT, firstname VARCHAR(50), lastname VARCHAR(50), email VARCHAR(50), PRIMARY KEY(id))';
-
-    database.query(sqlQuery, (err) => {
-        if (err) throw err;
-
-        res.send('Table created!')
-    });
+const {getAllAlerts,createNewAlert} = require('../models/alert.model');
+const {createNewWatchedCurrency} = require('../models/currency.model');
+const getAlerts = async (req, res) => {
+    return await getAllAlerts();
 };
 
-const getAlerts = (req, res) => {
-    const sqlQuery = 'SELECT * FROM alert';
-
-    database.query(sqlQuery, (err, result) => {
-        if (err) throw err;
-
-        res.json({ 'alert': result });
-    });
-};
+const createWatchedCurrency = async (req,res)=>{
+    return await createNewWatchedCurrency(req.body);
+}
 
 const saveOldRates = () => {
     let myHeaders = new Headers();
@@ -111,7 +98,7 @@ const monitor = () =>{
 
 module.exports = {
     getAlerts,
-    initDatabase,
     monitor,
-    saveOldRates
+    saveOldRates,
+    createWatchedCurrency
 }

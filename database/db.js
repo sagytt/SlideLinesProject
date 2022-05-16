@@ -12,9 +12,12 @@ const {
 } = process.env;
 
 (async ()=>{
+  console.log(dialect)
   const connection = await createConnection({host,user,password});
   await connection.query(`CREATE DATABASE IF NOT EXISTS ${database};`);
-})();
 
-const db = new Sequelize(database,user,password,{host,dialect});
+})();
+console.log(dialect);
+const db = new Sequelize(database,user,password,{dialect});
+
 module.exports = db;
