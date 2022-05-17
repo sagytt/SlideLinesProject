@@ -4,17 +4,22 @@ const fetch = require('node-fetch');
 
 const getAlerts = async (req, res) => {
     const allAlerts = await Alert.findAll()
-    allAlerts.forEach(a => console.log(
-        `Currency Symbol:: ${a.dataValues.currencySymbol} \t Value To Date:: ${a.dataValues.valueToDate} `))
+    res.status(200).send(allAlerts)
 };
 
-// const createWatchedCurrency = async (req,res)=>{
-//     return await createNewWatchedCurrency(req.body);
-// }
+const createCurrency = async (req, res) => {
+    let data = {
+        symbol: req.body.symbol,
+        threshold: req.body.threshold,
+    }
+    console.log(data)
+    const currency = await Currency.create(data)
+    res.status(200).send(currency)
+
+};
 
 const createAlert = (currentValue, symbol) => {
     const currentTime = Date.now();
-
     Alert.create({
         currencySymbol: symbol,
         valueToDate: currentValue,
@@ -35,7 +40,6 @@ const monitor = async () => {
             const data = JSON.parse(result);
             const ratesJson = data.rates;
 
-            // console.log(ratesJson)
             const allCurrencies = await Currency.findAll();
             allCurrencies.forEach(currency => {
                     if (ratesJson[(currency.dataValues.symbol)] > currency.threshold) {
@@ -50,4 +54,5 @@ const monitor = async () => {
 module.exports = {
     getAlerts,
     monitor,
+    createCurrency
 }

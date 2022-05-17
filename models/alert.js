@@ -12,7 +12,7 @@ const Alert = db.define('alert', {
         allowNull: false
     },
     valueToDate:{
-        type:  DataTypes.INTEGER(2),
+        type:  DataTypes.FLOAT(2),
         allowNull: false,
         default: 0
     }

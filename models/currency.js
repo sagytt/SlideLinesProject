@@ -15,6 +15,7 @@ const Currency = db.define(
         }
     }
 );
+
 db.sync({})
     .then(() => console.log('Database synchronised'))
     .catch(console.error)
