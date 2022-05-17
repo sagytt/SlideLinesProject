@@ -1,7 +1,7 @@
 // const { validationResult } = require('express-validator');
 let https = require('https');
-const {getAllAlerts,createNewAlert} = require('../models/alert.model');
-const {createNewWatchedCurrency} = require('../models/currency.model');
+const {getAllAlerts,createNewAlert} = require('../models/alert');
+const {createNewWatchedCurrency} = require('../models/currency');
 const getAlerts = async (req, res) => {
     return await getAllAlerts();
 };

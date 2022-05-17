@@ -10,10 +10,10 @@
     "debug": "~2.6.9",
     "dotenv": "^16.0.1",
     "express": "~4.16.1",
-    "hbs": "~4.0.4",
+    "hbs": "^4.2.0",
     "http-errors": "~1.6.3",
     "mysql2": "^2.3.3",
-    "node-fetch": "^3.2.4",
+    "node-fetch": "^2.6.7",
     "nodemon": "^2.0.16",
     "sequelize": "^6.19.0"
   },

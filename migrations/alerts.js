@@ -1,20 +1,24 @@
 const { Sequelize } = require('sequelize');
 const db = require('../database/db')
-const Alert = db.define(
-    'alert',
-    {
-        timestamps:true,
-        currencySymbol:{
-            type:Sequelize.STRING,
-            allowNull: false
-        },
-        valueToDate:{
-            type:Sequelize.FLOAT,
-            allowNull: true
-        }
+const DataTypes = Sequelize.DataTypes
+
+const Alert = db.define('alert', {
+    currencySymbol: {
+        type: DataTypes.STRING(40),
+        allowNull: false
+    },
+    valueToDate:{
+        type:  DataTypes.INTEGER(2),
+        allowNull: false,
+        default: 0
     }
-);
-(async ()=> {
-    await db.sync({force:true});
-})();
-module.exports=Alert;
+})
+
+db.sync({})
+    .then(() => console.log('Database synchronised'))
+    .catch(console.error)
+
+module.exports = Alert;
+
+
+
