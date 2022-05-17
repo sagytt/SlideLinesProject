@@ -1,10 +1,28 @@
-const Alerts = require('../migrations/alerts');
+const { Sequelize } = require('sequelize');
+const db = require('../database/db')
+const DataTypes = Sequelize.DataTypes
 
-const getAllAlerts = async ()=>{
-    return await Alerts.findAll({});
-}
-const createNewAlert = async (payload)=>{
-    const {currencySymbol,valueToDate} = payload;
-    await Alerts.create({currencySymbol,valueToDate});
-}
-module.exports={getAllAlerts,createNewAlert}
+const Alert = db.define('alert', {
+    timestamp: {
+        type: DataTypes.DATE,
+        allowNull: false
+    },
+    currencySymbol: {
+        type: DataTypes.STRING(40),
+        allowNull: false
+    },
+    valueToDate:{
+        type:  DataTypes.INTEGER(2),
+        allowNull: false,
+        default: 0
+    }
+})
+
+db.sync({alter:true})
+    .then(() => console.log('Database synchronised'))
+    .catch(console.error)
+
+module.exports = Alert;
+
+
+

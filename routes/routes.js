@@ -4,8 +4,8 @@ const controller = require('../contollers/controller');
 const router = express.Router();
 
 router.get('/alerts', controller.getAlerts);
-router.get('/save-old-rates', controller.saveOldRates);
+router.post('/watched-currency', controller.monitor);
 
-router.post('/watched-currency',controller.createWatchedCurrency);
+// router.post('/watched-currency',controller.createWatchedCurrency);
 
 module.exports = router;
